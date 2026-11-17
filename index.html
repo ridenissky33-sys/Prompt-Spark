@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompt Spark — random AI video prompt generator</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:#0d0d12; color:#f2f2f5; font-family:system-ui,sans-serif; }
+  main { max-width:640px; padding:24px; text-align:center; }
+  h1 { font-size:2rem; margin:0 0 8px; }
+  p.sub { color:#8b8b99; margin:0 0 32px; }
+  #prompt { font-size:1.4rem; line-height:1.5; min-height:7em; padding:24px; border:1px solid #2a2a38; border-radius:16px; background:#15151d; }
+  button { margin:20px 8px 0; padding:12px 22px; font-size:1rem; border:0; border-radius:999px; cursor:pointer; background:#7c5cff; color:#fff; }
+  button.alt { background:#2a2a38; }
+  button:hover { filter:brightness(1.15); }
+</style>
+</head>
+<body>
+<main>
+  <h1>✨ Prompt Spark</h1>
+  <p class="sub">Random cinematic prompts for AI video &amp; image tools.</p>
+  <div id="prompt"></div>
+  <button id="gen">Spark a new idea</button>
+  <button id="copy" class="alt">Copy</button>
+</main>
+<script>
+const subjects = ["a lone astronaut","a street musician","a giant paper crane","a fox in a trench coat","an old lighthouse keeper","a robot gardener","a ballerina made of smoke"];
+const places = ["on a neon-lit rooftop","inside a flooded cathedral","in a desert of mirrors","on the last train to nowhere","in a floating market above the clouds","in a forgotten library at dawn"];
+const styles = ["shot on 35mm film","in Studio Ghibli-like watercolor","as a dreamy long take","with dramatic chiaroscuro lighting","in glitchy retro-VHS style","as a slow-motion macro shot"];
+const moods = ["melancholic","hopeful","eerie","playful","epic","quietly surreal"];
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const el = document.getElementById("prompt");
+function spark() {
+  el.textContent = `${pick(subjects)} ${pick(places)}, ${pick(styles)}. Mood: ${pick(moods)}.`;
+}
+document.getElementById("gen").onclick = spark;
+document.getElementById("copy").onclick = () => navigator.clipboard.writeText(el.textContent);
+spark();
+</script>
+</body>
+</html>
